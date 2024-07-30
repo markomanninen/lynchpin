@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetrahedron with Pentagons</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script>
+      // Set up the scene, camera, and renderer
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Add OrbitControls for better visualization
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+      // Add lighting
+      const light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1).normalize();
+      scene.add(light);
+
+      // Create the tetrahedron
+      const tetraGeometry = new THREE.TetrahedronGeometry(1);
+      const tetraMaterial = new THREE.MeshNormalMaterial({ wireframe: true });
+      const tetrahedron = new THREE.Mesh(tetraGeometry, tetraMaterial);
+      scene.add(tetrahedron);
+
+      // Create the center point
+      const centerGeometry = new THREE.SphereGeometry(0.05, 32, 32);
+      const centerMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+      const centerPoint = new THREE.Mesh(centerGeometry, centerMaterial);
+      scene.add(centerPoint);
+
+      // Draw lines from the center to the vertices
+      const vertices = tetraGeometry.getAttribute("position").array;
+      const vertexPositions = [];
+      for (let i = 0; i < vertices.length; i += 3) {
+        vertexPositions.push(
+          new THREE.Vector3(vertices[i], vertices[i + 1], vertices[i + 2])
+        );
+      }
+
+      const edges = [];
+      vertexPositions.forEach((vertex) => {
+        edges.push(vertex.x, vertex.y, vertex.z);
+        edges.push(0, 0, 0);
+      });
+
+      const edgeGeometry = new THREE.BufferGeometry();
+      edgeGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(new Float32Array(edges), 3)
+      );
+      const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+      const lines = new THREE.LineSegments(edgeGeometry, edgeMaterial);
+      scene.add(lines);
+
+      // Calculate the normal of the triangle formed by the center and one face of the tetrahedron
+      function calculateNormal(p1, p2, p3) {
+        const v1 = new THREE.Vector3().subVectors(p2, p1);
+        const v2 = new THREE.Vector3().subVectors(p3, p1);
+        return new THREE.Vector3().crossVectors(v1, v2).normalize();
+      }
+
+      // Create the inner triangles with an opaque material
+      function createInnerTriangles(font) {
+        const innerTriangles = [];
+        const center = new THREE.Vector3(0, 0, 0);
+        const combinations = [
+          [0, 1],
+          [0, 2],
+          [0, 3],
+          [1, 2],
+          [1, 3],
+          [2, 3],
+        ];
+        const colors = [
+          0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff,
+        ];
+
+        combinations.forEach((indices, idx) => {
+          const p1 = vertexPositions[indices[0]];
+          const p2 = vertexPositions[indices[1]];
+          const normal = calculateNormal(center, p1, p2);
+
+          const innerTriangleGeometry = new THREE.BufferGeometry();
+          const innerTriangleVertices = new Float32Array([
+            0,
+            0,
+            0, // center of the tetrahedron
+            p1.x,
+            p1.y,
+            p1.z,
+            p2.x,
+            p2.y,
+            p2.z,
+          ]);
+          innerTriangleGeometry.setAttribute(
+            "position",
+            new THREE.BufferAttribute(innerTriangleVertices, 3)
+          );
+          const innerTriangleMaterial = new THREE.MeshBasicMaterial({
+            color: colors[idx],
+            opacity: 0.5,
+            transparent: true,
+            side: THREE.DoubleSide,
+          });
+          const innerTriangleMesh = new THREE.Mesh(
+            innerTriangleGeometry,
+            innerTriangleMaterial
+          );
+          scene.add(innerTriangleMesh);
+
+          // Draw the bold blue edges
+          const edgeGeometry1 = new THREE.BufferGeometry();
+          const edgeVertices1 = new Float32Array([
+            0,
+            0,
+            0,
+            p1.x,
+            p1.y,
+            p1.z,
+            p1.x,
+            p1.y,
+            p1.z,
+            p2.x,
+            p2.y,
+            p2.z,
+          ]);
+          edgeGeometry1.setAttribute(
+            "position",
+            new THREE.BufferAttribute(edgeVertices1, 3)
+          );
+          const edgeMaterial1 = new THREE.LineBasicMaterial({
+            color: 0x0000ff,
+            linewidth: 5,
+          });
+          const edge1 = new THREE.LineSegments(edgeGeometry1, edgeMaterial1);
+          scene.add(edge1);
+
+          // Add triangle number
+          const triangleNumber = innerTriangles.length + 1;
+          const textGeometry = new THREE.TextGeometry(
+            triangleNumber.toString(),
+            {
+              font: font,
+              size: 0.1,
+              height: 0.01,
+            }
+          );
+          const textMaterial = new THREE.MeshBasicMaterial({
+            color: colors[idx],
+          });
+          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+          textMesh.position.copy(
+            center.clone().add(p1).add(p2).divideScalar(3).multiplyScalar(0.5)
+          );
+          scene.add(textMesh);
+
+          innerTriangles.push({ p1, p2, normal, color: colors[idx] });
+        });
+        return innerTriangles;
+      }
+
+      // Load font and create the inner triangles with numbers
+      const loader = new THREE.FontLoader();
+      loader.load(
+        "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
+        function (font) {
+          const innerTrianglesData = createInnerTriangles(font);
+
+          // Function to create a pentagon with one vertex at the given position
+          function createPentagonWithVertexAt(vertex, sideLength) {
+            const angleIncrement = (2 * Math.PI) / 5;
+            const pentagonVertices = [];
+
+            // Convert side length to radius
+            const radius =
+              sideLength / Math.sqrt(2 - 2 * Math.cos((2 * Math.PI) / 5));
+
+            for (let i = 0; i < 5; i++) {
+              const angle = i * angleIncrement;
+              const x = radius * Math.cos(angle);
+              const y = radius * Math.sin(angle);
+              pentagonVertices.push(new THREE.Vector3(x, y, 0));
+            }
+
+            // Move the pentagon so one of its vertices is at the center of the tetrahedron
+            const shiftVector = new THREE.Vector3().subVectors(
+              vertex,
+              pentagonVertices[0]
+            );
+            for (let i = 0; i < pentagonVertices.length; i++) {
+              pentagonVertices[i].add(shiftVector);
+            }
+
+            // Close the pentagon
+            pentagonVertices.push(pentagonVertices[0]);
+
+            // Flatten the vertices into an array
+            const flattenedVertices = [];
+            pentagonVertices.forEach((v) => {
+              flattenedVertices.push(v.x, v.y, v.z);
+            });
+
+            const pentagonGeometry = new THREE.BufferGeometry();
+            pentagonGeometry.setAttribute(
+              "position",
+              new THREE.Float32BufferAttribute(flattenedVertices, 3)
+            );
+            return pentagonGeometry;
+          }
+
+          // Function to align the pentagon with a given triangle
+          function alignPentagonWithTriangle(pentagonGeometry, triangle) {
+            // Compute the quaternion to rotate the pentagon to the triangle plane
+            const normal = new THREE.Vector3(0, 0, 1); // The normal of the pentagon's initial plane
+            const quaternion = new THREE.Quaternion().setFromUnitVectors(
+              normal,
+              triangle.normal
+            );
+
+            // Apply the quaternion to the vertices of the pentagon geometry
+            const positions = pentagonGeometry.attributes.position.array;
+            const vector = new THREE.Vector3();
+            for (let i = 0; i < positions.length; i += 3) {
+              vector.set(positions[i], positions[i + 1], positions[i + 2]);
+              vector.applyQuaternion(quaternion);
+              positions[i] = vector.x;
+              positions[i + 1] = vector.y;
+              positions[i + 2] = vector.z;
+            }
+            pentagonGeometry.attributes.position.needsUpdate = true;
+
+            // Align the pentagon direction to match the median of the triangle
+            const midPoint = new THREE.Vector3()
+              .addVectors(triangle.p1, triangle.p2)
+              .multiplyScalar(0.5);
+            const alignDirection = new THREE.Vector3()
+              .subVectors(midPoint, new THREE.Vector3(0, 0, 0))
+              .normalize();
+            const currentDirection = new THREE.Vector3()
+              .subVectors(
+                new THREE.Vector3(positions[3], positions[4], positions[5]),
+                new THREE.Vector3(positions[0], positions[1], positions[2])
+              )
+              .normalize();
+            const directionRotationAxis = new THREE.Vector3()
+              .crossVectors(currentDirection, alignDirection)
+              .normalize();
+            const directionRotationAngle = Math.acos(
+              currentDirection.dot(alignDirection)
+            );
+            pentagonGeometry.applyMatrix4(
+              new THREE.Matrix4().makeRotationAxis(
+                directionRotationAxis,
+                directionRotationAngle
+              )
+            );
+            pentagonGeometry.attributes.position.needsUpdate = true;
+
+            // Rotate the pentagon by half the dihedral angle
+            const dihedralAngle = Math.acos(-1 / 3);
+            const halfDihedralAngle = -(
+              dihedralAngle / 2 -
+              (dihedralAngle - 108 * (Math.PI / 180)) / 2
+            );
+            pentagonGeometry.applyMatrix4(
+              new THREE.Matrix4().makeRotationAxis(
+                triangle.normal,
+                halfDihedralAngle
+              )
+            );
+            pentagonGeometry.attributes.position.needsUpdate = true;
+          }
+
+          // The distance from the center of the tetrahedron to one of its vertices
+          const centerToVertexDistance = vertexPositions[0].length();
+
+          // Function to create thick line
+          function createThickLine(p1, p2, color, thickness) {
+            const path = new THREE.LineCurve3(p1, p2);
+            const geometry = new THREE.TubeGeometry(path, 20, thickness, 8, false);
+            const material = new THREE.MeshBasicMaterial({ color: color }); // White color
+            return new THREE.Mesh(geometry, material);
+          }
+
+          // Create and align pentagons with each inner triangle
+          innerTrianglesData.forEach((triangle, index) => {
+            const pentagonGeometry = createPentagonWithVertexAt(
+              new THREE.Vector3(0, 0, 0),
+              centerToVertexDistance
+            );
+
+            alignPentagonWithTriangle(pentagonGeometry, triangle);
+
+            const pentagonVertices = pentagonGeometry.attributes.position.array;
+
+            for (let i = 0; i < pentagonVertices.length - 3; i += 3) {
+              const p1 = new THREE.Vector3(
+                pentagonVertices[i],
+                pentagonVertices[i + 1],
+                pentagonVertices[i + 2]
+              );
+              const p2 = new THREE.Vector3(
+                pentagonVertices[i + 3],
+                pentagonVertices[i + 4],
+                pentagonVertices[i + 5]
+              );
+              const thickLine = createThickLine(p1, p2, triangle.color, 0.005);
+              scene.add(thickLine);
+            }
+
+            // Add pentagon number
+            const pentagonNumber = index + 1;
+            const textGeometry = new THREE.TextGeometry(
+              pentagonNumber.toString(),
+              {
+                font: font,
+                size: 0.1,
+                height: 0.01,
+              }
+            );
+            const textMaterial = new THREE.MeshBasicMaterial({
+              color: triangle.color,
+            });
+            const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+
+            // Position the textMesh on the outer side of the pentagon
+            const outerVertex = new THREE.Vector3(
+              pentagonVertices[6],
+              pentagonVertices[7],
+              pentagonVertices[8]
+            );
+            textMesh.position.copy(outerVertex);
+            scene.add(textMesh);
+          });
+        }
+      );
+
+      // Position the camera
+      camera.position.z = 3;
+
+      // Render the scene
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
+  </body>
+</html>
