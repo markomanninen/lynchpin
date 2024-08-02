@@ -74,7 +74,7 @@ The Lynchpin geometry and its associated discrepancies demonstrate the fascinati
 - [OTOET eBook](https://tcotlc.com/wp-content/uploads/2020/09/OTOET_PREVIEW_055_SEPTEMBER_29_2020.pdf)
 - [Terrence Howard's Competition](https://www.terryslynchpins.com/welcome-to-now)
 
-For more detailed information, refer to the original LaTeX document included in the repository.
+For more detailed information, refer to the original study as [PDF](https://markomanninen.github.io/lynchpin/lynchpin.pdf) and [LaTeX](https://markomanninen.github.io/lynchpin/lynchpin.tex) documents included in the repository.
 
 ## License
 
