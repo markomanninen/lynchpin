@@ -32,7 +32,7 @@ To view the interactive 3D model, simply open the `index.html` file in a web bro
 
 ### Link to the App
 
-You can access the interactive 3D model directly by visiting the following link: [Lynchpin Geometry 3D Model](./index.html)
+You can access the interactive 3D model directly by visiting the following link: [Lynchpin Geometry 3D Model](https://markomanninen.github.io/lynchpin/)
 
 ## Detailed Explanation
 
