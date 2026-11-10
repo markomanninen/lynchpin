@@ -1,0 +1,28 @@
+name: tests-maxima
+# The proof chain behind the paper. Starts only when a Maxima test file, the
+# runner or this workflow changes on main, because installing Maxima takes
+# most of the run time.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/**.mac"
+      - "scripts/run_tests.sh"
+      - ".github/workflows/tests-maxima.yml"
+  workflow_dispatch:
+concurrency:
+  group: tests-maxima-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  maxima:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Maxima
+        timeout-minutes: 5
+        run: sudo apt-get -qq update && sudo apt-get -qq install -y --no-install-recommends maxima
+      - name: Run the Maxima suite
+        run: ./scripts/run_tests.sh maxima

@@ -1,0 +1,27 @@
+name: tests-node
+# The geometry module behind the interactive model. Starts only when the
+# module, its tests, the runner or this workflow changes on main. The runner
+# image already has Node, so the job installs nothing.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lynchpin4d.js"
+      - "tests/**.test.mjs"
+      - "package.json"
+      - "scripts/run_tests.sh"
+      - ".github/workflows/tests-node.yml"
+  workflow_dispatch:
+concurrency:
+  group: tests-node-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run the Node suite
+        run: ./scripts/run_tests.sh node

@@ -2,7 +2,6 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{tikz}
-\usepackage{tkz-euclide}
 \usepackage{hyperref}
 \usetikzlibrary{shapes.geometric, calc, decorations.markings}
 \usepackage{geometry}
@@ -22,11 +21,11 @@
 
 \begin{abstract}
 \noindent
-This study investigates the geometric angle discrepancy in a tetrahedron compared to a pentagon within the framework of Terrence Howard's Lynchpin concept. Although the numerical value of this geometric discrepancy resembles the Pythagorean comma in music theory, our analysis demonstrates that they are from different mathematical basis. We offer practical methods to measure and demonstrate this discrepancy in both musical terms (cents) and physical terms (millimeters). An interactive 3-D model is provided to further investigate and visualize the Lynchpin concept.
+Terrence Howard's Lynchpin is a figure of six regular pentagons that share one corner at the centre of a regular tetrahedron. The four segments from the centre to the vertices of the tetrahedron are called rays here, and the flat sector between two rays is called a wedge. One pentagon is placed in each of the six wedges so that its two sides at the shared corner run along the two rays. The sides cannot lie on the rays exactly, because any two rays enclose \( 109.47^\circ \) and the corner of a regular pentagon is \( 108^\circ \), which leaves a discrepancy of \( 1.47^\circ \) in each wedge. We show that the dimension of space forces this discrepancy. Four segments that leave one point in three-dimensional space can enclose six equal angles only at \( 109.47^\circ \), and four segments of which every two enclose \( 108^\circ \) span four dimensions. When each ray is tilted by \( 7.76^\circ \) towards a fourth axis, all sides lie on their rays, and the figure then consists of the four edges and six pentagonal faces that meet at one vertex of the 120-cell, a regular four-dimensional polytope. Howard and Eric Weinstein compared the discrepancy with the Pythagorean comma of music theory. The ratio of the two angles, \( 1.0136224 \), agrees with the comma, \( 1.0136433 \), to four decimals. We prove that the angle ratio is irrational, so that it equals neither the comma nor any other ratio of whole numbers. In a Lynchpin built from pentagons with sides of 5 cm, the ends of the pentagon sides that should meet at the end of a ray lie 1.11 millimetres apart. An interactive model at \url{https://markomanninen.github.io/lynchpin} folds the figure into the fourth dimension, and scripts in the repository \url{https://github.com/markomanninen/lynchpin} check the identities and numerical values of the paper.
 \end{abstract}
 
 \section*{Keywords}
-Tetrahedron, Pentagon, Geometric discrepancy, Lynchpin concept, Terrence Howard, Eric Weinstein, Pythagorean comma, Solid angles, Centroid, 3-D model, Geometric analysis, Musical intervals, Engineering applications, Joe Rogan Experience
+Tetrahedron, Pentagon, Geometric discrepancy, Lynchpin concept, Terrence Howard, Eric Weinstein, Pythagorean comma, Centroid, 120-cell, Regular polytopes, Four dimensions, Geometric frustration, 3-D model, Geometric analysis, Musical intervals, Joe Rogan Experience
 
 \thispagestyle{empty}
 
@@ -38,33 +37,28 @@ Tetrahedron, Pentagon, Geometric discrepancy, Lynchpin concept, Terrence Howard,
 
 
 \section{Background}
-In the conversation between American mathematician Eric Weinstein and actor Terrence Howard on the Joe Rogan Experience (JRE) \#2171 (beginning at 2:49:08 and ending at 3:01:25), they discuss Howard's concept of the Lynchpin and its geometric and other implications.
+In episode \#2171 of the Joe Rogan Experience (JRE), the mathematician Eric Weinstein and the actor Terrence Howard discuss Howard's Lynchpin from 2:49:08 to 3:01:25 \cite{joe-rogan}.
 
 The term lynchpin commonly refers to something or someone essential to an organization, system, or situation, holding all the various elements together whose failure or removal could lead to the collapse or dysfunction of a larger structure. Originally, a lynchpin was a physical pin passed through the end of an axle to keep a wheel in place, crucial for the functioning of wheeled vehicles.
 
-Howard explains his Lynchpin as a fundamental element or lowest common denominator of all matter, involving concepts like the internal dimensions of a torus and universal wave conjugation.
+As a geometric figure, Howard's Lynchpin consists of six regular pentagons that share one corner at the centre of a regular tetrahedron. Sections \ref{sec:tetra} to \ref{sec:pentagons} construct the figure step by step. Howard describes the Lynchpin as a fundamental element or lowest common denominator of all matter, and he connects it with ideas that he calls the internal dimensions of a torus and universal wave conjugation. This paper examines the geometry of the figure and leaves Howard's wider claims aside. Howard presents them in his book One Times One Equals Two (OTOET), pages 124 and 145 \cite{ebook}.
 
-Weinstein critiques theories that claim to explain everything with a single principle, such as string theory, which posits that particles are vibrating strings. He expresses concern whether such "mass delusions" could also be associated with the Lynchpin concept.
+Weinstein first places the Lynchpin among theories that claim to explain everything with a single principle. He criticises such theories and names string theory, which describes particles as vibrating strings, as an example. He calls them mass delusions and asks whether the Lynchpin concept could be one of them.
 
-While the details of the Lynchpin implications are not well elaborated in the interview, we have enough hints to review the Lynchpin geometry. Implications are discussed in the wider context in Howard's OTOET eBook, pages 124 and 145. (\href{https://tcotlc.com/wp-content/uploads/2020/09/OTOET_PREVIEW_055_SEPTEMBER_29_2020.pdf}{PDF})
+About the figure itself, Weinstein says that it contains a mathematical error or flaw, and he also calls the figure beautiful. The flaw he speaks of is that the six pentagons do not fit exactly around the centre of the tetrahedron. This paper calls the angle by which they fail to fit the discrepancy. Weinstein's words do not say that Howard has overlooked the discrepancy or miscalculated it. When Howard mentions the Pythagorean comma, Weinstein replies, "Now we are talking about it!" The Pythagorean comma is a small interval in musical tuning, defined in Section \ref{sec:comma}, and Weinstein uses it as an analogy for the small discrepancy of the pentagons.
 
-Weinstein suggests that Howard's Lynchpin discovery might be based on a mathematical error but acknowledges its beauty and potential. When Howard references the Pythagorean comma as a discrepancy in this regard, Weinstein states, "Now we are talking about it!" Weinstein draws an analogy between the Pythagorean comma—a small frequency interval that illustrates imperfections in musical tuning systems—and the geometrical issues in Howard's Lynchpin concept.
+Weinstein proposes that the Lynchpin might be useful in engineering in spite of the discrepancy, because the figure offers what he calls six geometrical degrees of freedom in design. In his view a discrepancy as small as the Pythagorean comma might stay within engineering tolerances.
 
-Weinstein proposes that, despite the flaw, Howard's Lynchpin concept might have engineering potential due to its ability to give six geometrical degrees of freedom in design. A small, unavoidable discrepancy, similar in scale to the Pythagorean comma, might fall within engineering error margins and tolerances.
+Howard mentions the Pythagorean comma himself, but the discussion does not show whether he regards the discrepancy of the pentagons and the comma as the same quantity. This paper gives the exact cause of the discrepancy. It also proves that the ratio of the two angles involved differs from the Pythagorean comma, although the two values are nearly the same.
 
-Weinstein's use of the words "error" and "flaw" should not be interpreted as implying that Howard has overlooked the discrepancy or that there is a fault in the mathematical calculations of the Lynchpin. However, it is not clear from the discussion whether Terrence has directly related the geometric angle discrepancy to the Pythagorean comma. In this document, we demonstrate that these discrepancies originate from different bases and are not evidently related even if their values are approximately the same.
+Weinstein treats the practical use of the Lynchpin as an open question. Howard had arranged a competition on applications in 2021, and according to the competition website three participants built drone devices based on the Lynchpin concept and received a prize \cite{lynchpin-competition}.
 
-Moreover, Weinstein did not acknowledge that Howard has already demonstrated a practical patented application by conducting a competition in 2021. Three participants built drone devices based on the Lynchpin concept showing successful engineering proof, which Howard awarded with a prize. (\href{https://www.terryslynchpins.com/welcome-to-now}{Website})
-
-Earlier in the JRE \#2127 discussion (01:13:40), Weinstein highlighted several instances where fundamental geometric structures, analogous to Platonic solids, have yielded practical applications. Notable examples include the Rubik's cube, introduced in 1974, and Hoberman's Switch-Pitch ball, developed in 2001.
-
-Finally, Weinstein referenced viral capsids (03:08:58)—protein shells that exhibit nearly perfect icosahedral symmetry—as functional biological entities. These examples challenge the notion that foundational geometric concepts from antiquity lack contemporary relevance or that biological forms rely exclusively on ideal geometries.
-
-For the full conversation, refer to Joe Rogan Experience \#2171 - Eric Weinstein \& Terrence Howard on July 1, 2024. (\href{https://www.youtube.com/watch?v=nrOaFxNex7U}{YouTube})
+Weinstein supports the idea of practical use with examples of other regular figures. In the JRE \#2127 discussion (01:13:40), he lists geometric structures that are related to the Platonic solids, the five regular solids known since antiquity, and that have become practical devices. His examples include the Rubik's cube, introduced in 1974, and Hoberman's Switch-Pitch ball, developed in 2001. He also mentions viral capsids (03:08:58), protein shells of viruses whose shape has nearly the symmetry of the icosahedron, the Platonic solid with twenty triangular faces.
 
 
-\section{Tetrahedron Basics}
-A tetrahedron is a three-dimensional polyhedron with four triangular faces, six straight edges, and four vertices. The tetrahedron is one of the simplest and most symmetric platonic solids.
+\section{The Regular Tetrahedron}
+\label{sec:tetra}
+A tetrahedron is a polyhedron with four triangular faces, six edges and four vertices. In a regular tetrahedron all six edges have the same length, and every face is an equilateral triangle. The Lynchpin uses a regular tetrahedron, and its vertices are called \( A \), \( B \), \( C \) and \( D \).
 
 \begin{center}
 \begin{tikzpicture}
@@ -91,18 +85,19 @@ A tetrahedron is a three-dimensional polyhedron with four triangular faces, six 
 \end{tikzpicture}
 \end{center}
 
-\noindent
-The above diagram shows a tetrahedron with vertices \( A \), \( B \), \( C \), and \( D \). Each edge is of equal length, and each face is an equilateral triangle. Each internal angle of the equilateral triangles that form the faces is \( 60^\circ \).
 
-
-\section{Centroid of the Tetrahedron}
-The centroid of a tetrahedron is the point where the four medians intersect. It is the center of mass of the tetrahedron and is located at an equal distance from all four vertices. This can also be seens as the radius of the circumscribed sphere, which passes through all four vertices and is centered at the centroid, and is considered to be of unit length (1) in the following example.
-
-The centroid can be found by averaging the coordinates of the vertices. If the vertices of the tetrahedron are given as \( A(x_1, y_1, z_1) \), \( B(x_2, y_2, z_2) \), \( C(x_3, y_3, z_3) \), and \( D(x_4, y_4, z_4) \), then the coordinates of the centroid \( G \) are given by:
-
+\section{The Centroid and the Four Rays}
+The centroid of a tetrahedron is the point whose coordinates are the averages of the coordinates of the four vertices. If the vertices are \( A(x_1, y_1, z_1) \), \( B(x_2, y_2, z_2) \), \( C(x_3, y_3, z_3) \), and \( D(x_4, y_4, z_4) \), then the centroid \( G \) is
 \[
-G \left( \frac{x_1 + x_2 + x_3 + x_4}{4}, \frac{y_1 + y_2 + y_3 + y_4}{4}, \frac{z_1 + z_2 + z_3 + z_4}{4} \right)
+G \left( \frac{x_1 + x_2 + x_3 + x_4}{4}, \frac{y_1 + y_2 + y_3 + y_4}{4}, \frac{z_1 + z_2 + z_3 + z_4}{4} \right) .
 \]
+This paper places the regular tetrahedron at the coordinates
+\[
+A = \tfrac{1}{\sqrt{3}}(1, 1, 1), \quad B = \tfrac{1}{\sqrt{3}}(1, -1, -1), \quad C = \tfrac{1}{\sqrt{3}}(-1, 1, -1), \quad D = \tfrac{1}{\sqrt{3}}(-1, -1, 1) .
+\]
+Every coordinate sums to zero over the four vertices, so the centroid \( G \) is the origin \( (0, 0, 0) \). Each vertex lies at the distance \( \sqrt{(1 + 1 + 1)/3} = 1 \) from \( G \), so the four vertices lie on a sphere of radius 1 around the centroid.
+
+The four segments \( GA \), \( GB \), \( GC \) and \( GD \) from the centroid to the vertices are called the rays in this paper. Each ray has the length 1. Two rays span a plane, and the part of that plane between the two rays is called a wedge. Four rays form six pairs, so there are six wedges, \( AGB \), \( AGC \), \( AGD \), \( BGC \), \( BGD \) and \( CGD \).
 
 \begin{center}
 \begin{tikzpicture}
@@ -116,7 +111,7 @@ G \left( \frac{x_1 + x_2 + x_3 + x_4}{4}, \frac{y_1 + y_2 + y_3 + y_4}{4}, \frac
     \fill[gray!30] (A) -- (B) -- (D) -- cycle;
     \fill[gray!50] (A) -- (D) -- (C) -- cycle;
     \fill[gray!70] (B) -- (D) -- (C) -- cycle;
-    
+
     \draw[thick, fill=black] (2,1.53) circle(1pt);
 
     % Draw the edges
@@ -140,195 +135,283 @@ G \left( \frac{x_1 + x_2 + x_3 + x_4}{4}, \frac{y_1 + y_2 + y_3 + y_4}{4}, \frac
 \end{center}
 
 \noindent
-The diagram shows the tetrahedron with its centroid \( G \). The dotted lines represent the four medians connecting the vertices to the centroid.
+The diagram shows the tetrahedron with its centroid \( G \). The dotted lines are the four rays.
 
 
-\section{Internal Angle from the Centroid to the Vertices}
-The internal angle from the centroid \( G \) of the tetrahedron to its vertices \( A \), \( B \), \( C \), and \( D \) can be calculated as follows:
-
-1. \textbf{Vector Calculation}: Consider vectors from the centroid \( G \) to any of the vertices, for example, \( \overrightarrow{GA} \), \( \overrightarrow{GB} \), etc.
-
-2. \textbf{Dot Product}: The dot product of any two vectors from the centroid to two vertices is:
-   \[
-   \overrightarrow{GA} \cdot \overrightarrow{GB} = |GA| \cdot |GB| \cdot \cos(\theta)
-   \]
-   Since the vectors are of equal length (since \( G \) is equidistant from all vertices), and given that the tetrahedron is regular, the dot product simplifies using the edge length and the centroid coordinates.
-
-3. \textbf{Derivation of the Angle}: For a regular tetrahedron, this dot product calculation leads to:
-   \[
-   \cos(\theta) = -\frac{1}{3}
-   \]
-   Therefore, the angle \(\theta\) is:
-   \[
-   \theta = \arccos\left(-\frac{1}{3}\right) \approx 109.47^\circ
-   \]
-
-\noindent
-This angle is sometimes referred to simply as the tetrahedral angle. There are totally six such angles formed inside the tetrahedron, each to be matched with two regular pentagon sides in the Lynchpin.
+\section{The Angle between Two Rays}
+\label{sec:angle}
+The angle \( \theta \) between the rays \( GA \) and \( GB \) follows from the scalar product of the vectors \( A \) and \( B \), because \( G \) is the origin. The scalar product of two vectors is the product of their lengths and the cosine of the angle between them, and both rays have the length 1, so
+\[
+\cos\theta = A \cdot B = \tfrac{1}{3}\left( 1 \cdot 1 + 1 \cdot (-1) + 1 \cdot (-1) \right) = -\tfrac{1}{3} .
+\]
+Any other two of the four vectors also agree in the sign of one coordinate and differ in the other two, so every pair of rays gives the same scalar product. The angle between any two rays is therefore
+\[
+\theta = \arccos\left(-\tfrac{1}{3}\right) \approx 109.47^\circ .
+\]
+This angle is called the tetrahedral angle. All six wedges have this angle at \( G \).
 
 
-\section{Pentagon Geometry}
-Next, let's explore the geometric properties of a regular pentagon, where the side length is equal to the radius of the circumscribed sphere of the tetrahedron, which is considered to be of unit length.
-
-A regular pentagon is a five-sided polygon with equal side lengths and equal internal angles.
+\section{Six Pentagons in the Six Wedges}
+\label{sec:pentagons}
+A regular pentagon is a polygon with five sides of equal length and five equal interior angles.
 
 \begin{center}
 \begin{tikzpicture}
     \draw[thick] (18:2) -- (90:2) -- (162:2) -- (234:2) -- (306:2) -- cycle;
     \foreach \x in {18, 90, 162, 234, 306}
         \draw[thick, fill=black] (\x:2) circle(1.5pt);
-
-    \draw[thick, fill=black] (0,0) circle(2pt);
-    \draw[dashed, thick] (0,0) -- (162:2);
-
-    \node[above] at (90:2.2) {A};
-    \node[above left] at (162:2.2) {B};
-    \node[below left] at (234:2.2) {C};
-    \node[below right] at (306:2.2) {D};
-    \node[above right] at (18:2.2) {E};
-    \node[below] at (0,-0.2) {O};
-    \node[left] at (-250:1) {$R$};
+    \draw (90:2) ++(-126:0.5) arc (-126:-54:0.5);
+    \node at (90:1.25) {$108^\circ$};
 \end{tikzpicture}
 \end{center}
 
 \noindent
-Each internal angle of a regular pentagon is:
+The interior angles of a polygon with five sides add up to \( (5-2) \times 180^\circ \), so each corner of a regular pentagon has the angle
 \[
-\alpha = \frac{(5-2) \times 180^\circ}{5} = 108^\circ
+\frac{(5-2) \times 180^\circ}{5} = 108^\circ .
 \]
 
-\noindent
-To find the radius of the circumscribed circle around the pentagon, we use the relationship between the side length \( s \) of the pentagon and the radius \( R \):
+The Lynchpin places one regular pentagon in each of the six wedges. This paper and the interactive model read the placement as the following four rules.
 
-\[
-s = 2R \sin\left(\frac{\pi}{5}\right) \approx 1.176 \cdot R
-\]
-
-\noindent
-Given that \( s = 1 \) and solving for \( R \):
-
-\[
-R = \frac{1}{2 \sin\left(\frac{\pi}{5}\right)} \approx 0.85
-\]
+\begin{enumerate}
+\item The side of the pentagon has the length 1, the length of a ray, so that a side laid along a ray would reach from \( G \) exactly to the vertex of the tetrahedron.
+\item The pentagon lies in the plane of its wedge.
+\item One corner of the pentagon is at the centroid \( G \).
+\item The pentagon is centred in the wedge, which means that its line of symmetry through \( G \) is the bisector of the wedge.
+\end{enumerate}
 
 \noindent
-Thus, the radius of the circumscribed circle \( R \) around the pentagon with a side length of 1 is approximately 0.85 units. This radius is useful to draw pentagon vertices for the interactive 3-D model of the Lynchpin.
-
-To produce the Lynchpin geometry, the task is to match tetrahedron side GA and GB with pentagon side AB and AE, respectively, and do it for all six internal tetrahedron angles: AGB, AGC, AGD, BGC, BGD, and CGD. (See also Figure \ref{fig:3d-lynchpin})
+The two sides of the pentagon that meet at \( G \) then point along the two rays of the wedge as nearly as the two angles allow (Figure \ref{fig:wedge}). Figure \ref{fig:3d-lynchpin} shows all six pentagons.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{3d-lynchpin.png}
-\caption{3-D representation of the Lynchpin geometry, where six pentagon vertices meet at the centroid of the tetrahedron. For an interactive 3-D model, visit the \href{https://markomanninen.github.io/lynchpin}{Lynchpin GitHub-project webpage}.}
+\input{lynchpin-figure}
+\caption{The Lynchpin in three dimensions. The dashed lines are the edges of the tetrahedron \( ABCD \), the black lines are the four rays from the centroid to the vertices, and each of the six coloured pentagons lies in the wedge between two rays. The interactive model at \url{https://markomanninen.github.io/lynchpin} shows the figure from any direction.}
 \label{fig:3d-lynchpin}
 \end{figure}
 
+Each ray belongs to three wedges. The ray \( GA \), for example, borders the wedges \( AGB \), \( AGC \) and \( AGD \). Three pentagons therefore have a side next to each ray. The figure is called closed in this paper when every one of these sides lies exactly on its ray. In a closed figure the three pentagons at a ray share that ray as a common side, and the six pentagons are joined to each other along the four rays.
 
-\section{Tetrahedron and Pentagon Angle Discrepancy}
-Comparing the internal angle from the centroid to the vertices in the tetrahedron (\( 109.47^\circ \)) with the internal angle of the pentagon (\( 108^\circ \)), we find a small discrepancy:
+
+\section{The Discrepancy between the Two Angles}
+The wedge has the angle \( \theta \approx 109.47^\circ \) at \( G \), and the corner of the pentagon has \( 108^\circ \). The wedge is wider than the corner by the discrepancy
 \[
-109.47^\circ - 108^\circ = 1.47^\circ
+\delta = \arccos\left(-\tfrac{1}{3}\right) - 108^\circ \approx 1.4712^\circ .
 \]
-
-\noindent
-The ratio of these angles is:
-\[
-\frac{109.47}{108} \approx 1.01361
-\]
-
-\noindent
-See Figure \ref{fig:3d-lynchpin-error} for the visual representation of the discrepancy.
+A pentagon centred in its wedge leaves half of the discrepancy on each side. Each of its two sides at \( G \) runs \( \delta/2 \approx 0.7356^\circ \) inside the neighbouring ray, as Figure \ref{fig:wedge} shows. The sides do not lie on the rays, so the Lynchpin in three dimensions is not closed.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{3d-lynchpin-error.png}
-\caption{3-D representation of the Lynchpin "error," where tetrahedron inner triangle sides (eg. 1 and 2) connect, while the respective pentagon sides (red and green) do not.}
-\label{fig:3d-lynchpin-error}
+\begin{tikzpicture}
+    \coordinate (G) at (0,0);
+    \coordinate (Pa) at (2.103,1.528);
+    \coordinate (Pb) at (-2.103,1.528);
+    \coordinate (Pc) at (1.300,4.001);
+    \coordinate (Pd) at (-1.300,4.001);
+    \coordinate (A) at (2.283,1.245);
+    \coordinate (B) at (-2.283,1.245);
+    \fill[blue!15] (G) -- (Pa) -- (Pc) -- (Pd) -- (Pb) -- cycle;
+    \draw[blue, thick] (G) -- (Pa) -- (Pc) -- (Pd) -- (Pb) -- cycle;
+    \draw[black, very thick] (G) -- (A);
+    \draw[black, very thick] (G) -- (B);
+    \draw[dotted] (G) -- (0,4.4);
+    \fill (G) circle (1.6pt);
+    \fill (A) circle (1.6pt);
+    \fill (B) circle (1.6pt);
+    \node[below] at (G) {\( G \)};
+    \node[right] at (A) {\( A \)};
+    \node[left] at (B) {\( B \)};
+    \draw (36:0.9) arc (36:144:0.9);
+    \node at (0,1.25) {\( 108^\circ \)};
+    \node[right] at (2.2,1.75) {\( \delta/2 \)};
+    \node[left] at (-2.2,1.75) {\( \delta/2 \)};
+    \node at (0,3.2) {pentagon};
+\end{tikzpicture}
+\caption{One wedge seen face on. The thick black lines are the rays \( GA \) and \( GB \), which enclose \( 109.47^\circ \), and the dotted line is the bisector of the wedge. The blue pentagon has its \( 108^\circ \) corner at \( G \), and each of its two sides at \( G \) runs \( \delta/2 \) inside a ray. The drawing shows \( \delta/2 \) ten times larger than its true size of \( 0.74^\circ \).}
+\label{fig:wedge}
 \end{figure}
 
+At each ray three pentagon sides start at \( G \) together with the ray and then separate from the ray and from each other. Section \ref{sec:size} gives the distances between their far ends in millimetres.
 
-\section{Pythagorean Comma}
-The Pythagorean comma is the small interval by which twelve perfect fifths (each with a frequency ratio of \( \frac{3}{2} \)) exceed seven octaves (each with a frequency ratio of 2). Mathematically, this is expressed as:
+
+\section{The Lynchpin Closes in Four Dimensions}
+\label{sec:4d}
+The Lynchpin is closed when both sides of every pentagon at \( G \) lie on the rays. A pentagon whose two sides lie on two rays has its \( 108^\circ \) corner between those rays. A closed figure therefore needs four rays of which every pair encloses \( 108^\circ \). This section shows that such rays do not exist in three dimensions and that they do exist in four.
+
+\subsection{Three Dimensions Allow Only the Tetrahedral Angle}
+Let \( u_1, u_2, u_3, u_4 \) be vectors of length 1 along four rays, and suppose that every pair of them has the same scalar product \( c \), the cosine of their common angle. Collect the scalar products \( u_i \cdot u_j \) in a matrix. It has ones on the diagonal and \( c \) elsewhere, and its determinant is
 \[
-\left(\frac{3}{2}\right)^{12} \approx 129.74634 \quad \text{and} \quad 2^7 = 128
+\det \begin{pmatrix} 1 & c & c & c \\ c & 1 & c & c \\ c & c & 1 & c \\ c & c & c & 1 \end{pmatrix} = (1 + 3c)(1 - c)^3 .
 \]
+The formula follows from four sets of numbers that the matrix only multiplies by a factor. The matrix multiplies the set \( (1, 1, 1, 1) \) by \( 1 + 3c \), because every row adds up to \( 1 + 3c \). It multiplies each of the sets \( (1, -1, 0, 0) \), \( (1, 0, -1, 0) \) and \( (1, 0, 0, -1) \) by \( 1 - c \), because the difference of two columns has \( 1 - c \) and \( c - 1 \) in two rows and zeros elsewhere. The four sets are linearly independent, and the determinant of a matrix is the product of four such factors, which are its eigenvalues.
+
+Four vectors in three-dimensional space are linearly dependent, which means that some combination \( \lambda_1 u_1 + \lambda_2 u_2 + \lambda_3 u_3 + \lambda_4 u_4 \) with numbers \( \lambda_i \) that are not all zero is the zero vector. The scalar product of this combination with each \( u_i \) is zero, and these four equations say that the matrix sends the numbers \( \lambda_1, \dots, \lambda_4 \) to zero. A matrix that sends a nonzero set of numbers to zero has the determinant zero. Read in the other direction, the same fact says that four vectors whose matrix of scalar products has a determinant different from zero are linearly independent.
+
+The determinant \( (1 + 3c)(1 - c)^3 \) is zero only for \( c = 1 \), where all four rays coincide, and for \( c = -\frac{1}{3} \). Four distinct rays in three-dimensional space can therefore enclose six equal angles only at \( \arccos(-\frac{1}{3}) \approx 109.47^\circ \), the tetrahedral angle. Six angles of \( 108^\circ \) are excluded, so the six pentagons cannot all close in three dimensions, whatever the directions of the four rays.
+
+\subsection{The Pentagon Angle Needs a Fourth Dimension}
+The cosine of the pentagon angle has the exact value \( \cos 108^\circ = \frac{1 - \sqrt{5}}{4} \approx -0.3090 \). For this value of \( c \),
 \[
-\text{Pythagorean comma} = \frac{129.74634}{128} \approx 1.01364
+1 + 3c = \frac{7 - 3\sqrt{5}}{4} \approx 0.0729
 \]
+and \( 1 - c \approx 1.3090 \), so the determinant is not zero. By the last sentence of the previous subsection, four rays of which every pair encloses \( 108^\circ \) are linearly independent. Three-dimensional space has room for only three linearly independent vectors, so four of them span a four-dimensional space.
 
-
-\section{Comparing the Ratios}
-The ratio of the angle discrepancy in the geometric context (using \(\theta = \arccos(-\frac{1}{3})\)) is compared to the ratio of the Pythagorean comma. Using six-digit precision, the ratios are normalized to the same numerator and denominator for accurate comparison.
-
-\subsection{Pythagorean Comma}
-
-The Pythagorean comma ratio comes from prime numbers 2 and 3 and is expanded as follows:
-
+Such rays can be written down directly. Add a fourth coordinate to the three coordinates of space. The tetrahedron keeps the fourth coordinate 0, so its rays are \( t_1 = (A, 0) \), \( t_2 = (B, 0) \), \( t_3 = (C, 0) \) and \( t_4 = (D, 0) \), and the vector \( e_4 = (0, 0, 0, 1) \) points along the fourth axis and is perpendicular to all four rays. Tilt every ray by the same angle \( \tau \) towards the fourth axis,
 \[
-\left(\frac{3}{2}\right)^{12} \quad \text{to} \quad 2^7 = \frac{531441}{524288}
+u_i = \cos\tau \, t_i + \sin\tau \, e_4 .
 \]
+Each \( u_i \) still has the length 1. Since \( t_i \cdot t_j = -\frac{1}{3} \) by Section \ref{sec:angle}, the scalar product of two tilted rays is
+\[
+u_i \cdot u_j = -\tfrac{1}{3}\cos^2\tau + \sin^2\tau = -\tfrac{1}{3} + \tfrac{4}{3}\sin^2\tau ,
+\]
+where the last step uses \( \cos^2\tau = 1 - \sin^2\tau \). The tilted rays enclose \( 108^\circ \) when this scalar product equals \( \cos 108^\circ \), which gives
+\[
+\sin^2\tau = \frac{1 + 3\cos 108^\circ}{4} = \frac{7 - 3\sqrt{5}}{16}, \qquad \tau \approx 7.76^\circ .
+\]
+With the golden ratio \( \varphi = \frac{1+\sqrt{5}}{2} \) the same value reads \( \sin^2\tau = \frac{1}{8\varphi^4} \).
 
-\subsection{Geometric Ratio}
+Now place the six pentagons by the rules of Section \ref{sec:pentagons} in the wedges of the tilted rays. Each wedge has exactly the angle \( 108^\circ \) of the pentagon corner, so both sides of every pentagon at \( G \) lie on their rays. The figure is closed, and the discrepancy of \( 1.47^\circ \) has disappeared.
 
-The tetrahedron internal angle to the internal angle of the pentagon is:
-\[
-\frac{109.4712206}{108} \approx \frac{109471}{108000}
-\]
+\subsection{Flattening the Closed Figure}
+The tilt angle connects the closed figure with the Lynchpin of three dimensions. Let \( \tau \) decrease from \( 7.76^\circ \) to \( 0^\circ \), and keep every pentagon regular and centred in its wedge. The rays turn back into three-dimensional space, the angle between two rays grows from \( 108^\circ \) to \( 109.47^\circ \), and the sides of the pentagons leave the rays by an angle that grows from \( 0^\circ \) to \( \delta/2 \). At \( \tau = 0^\circ \) the figure is the Lynchpin of Figure \ref{fig:3d-lynchpin}. This motion is called flattening in this paper, and the opposite motion, with \( \tau \) growing from \( 0^\circ \) to \( 7.76^\circ \), is called folding. The interactive model performs both with one slider.
 
-1. \textbf{Normalized Denominator}: Prime factorization by using a fixed Pythagorean comma numerator (531441):
-\[
-531441 = 3^{12}, \quad 524299 = 43 \times 89 \times 137
-\]
-Ratio:
-\[
-\frac{531441}{524299} \approx 1.013622
-\]
+A second way from four dimensions to three is the orthogonal projection, which drops the fourth coordinate. It sends each tilted ray \( u_i \) to \( \cos\tau \, t_i \), the original ray shortened by the factor \( \cos\tau \approx 0.9908 \). The projection keeps the pentagons joined along the rays, and it widens their corners at \( G \) from \( 108^\circ \) to \( 109.47^\circ \), so the projected pentagons are no longer regular. The two ways show the choice that three dimensions leave. The pentagons can stay regular and open a gap, or they can stay joined and lose their regular shape.
 
-2. \textbf{Normalized Numerator}: Prime factorization by using a fixed Pythagorean comma denominator (524288):
+\subsection{The Closed Figure Is a Vertex of the 120-Cell}
+A polytope is the counterpart of a polyhedron in four dimensions. Its boundary consists of polyhedra, called cells, in the same way as the boundary of a polyhedron consists of polygons. The regular dodecahedron is the Platonic solid with twelve regular pentagons as faces, three of which meet at every corner. The 120-cell is a regular polytope whose boundary consists of 120 regular dodecahedra \cite{coxeter}. It has 600 vertices, 1200 edges and 720 pentagonal faces, and four edges, six pentagons and four dodecahedra meet at every vertex. Every two of the four edges at a vertex are two sides of one of the six pentagons, so every two edges enclose \( 108^\circ \). The scalar products of four vectors fix the vectors up to a rotation of the whole set, so four edges of which every two enclose \( 108^\circ \) are the tilted rays of the previous subsections in another position and at another scale. With the six regular pentagons between them, they are the closed Lynchpin. The scripts of Section \ref{sec:verification} build the 120-cell from its coordinates and confirm the numbers of vertices, edges and pentagons and the angle of \( 108^\circ \) at every one of the 600 vertices.
+
+The tilt angle \( \tau \) can be found in the 120-cell as well. All 600 vertices lie on a sphere around the centre \( M \) of the 120-cell. In the standard coordinates of the 120-cell \cite{coxeter} the radius of this sphere is \( r = \sqrt{8} \) and the length of an edge is \( \ell = 3 - \sqrt{5} \). Let \( V \) and \( W \) be the two ends of an edge. The triangle \( MVW \) has two sides of length \( r \) and the base \( \ell \), so the edge \( VW \) and the segment \( VM \) enclose an angle with the cosine \( \frac{\ell}{2r} \). All four edges at \( V \) enclose this same angle with the segment \( VM \), so the direction from \( V \) to \( M \) is placed among the four edges in the way the fourth axis \( e_4 \) is placed among the four tilted rays. The directions perpendicular to \( VM \) form the three-dimensional space from which the edges are tilted. The tilt \( \tau \) is measured from that space, so it is \( 90^\circ \) minus the angle against \( VM \), and the cosine of the angle against \( VM \) is the sine of the tilt,
 \[
-531430 = 2 \times 5 \times 19 \times 2797, \quad 524288 = 2^{19}
+\sin\tau = \frac{\ell}{2r} = \frac{3 - \sqrt{5}}{2\sqrt{8}} \approx 0.1350 ,
 \]
-Ratio:
+and the square of this number is \( \frac{7 - 3\sqrt{5}}{16} \), the value found above. Each edge of the 120-cell is tilted towards the centre by the same \( 7.76^\circ \) as the rays of the closed Lynchpin.
+
+The closed Lynchpin is therefore the set of four edges and six pentagons at one vertex of the 120-cell, and the Lynchpin of Figure \ref{fig:3d-lynchpin} is this set flattened into three dimensions. Figure \ref{fig:cell120} shows the closed Lynchpin inside the 120-cell.
+
+\begin{figure}[h]
+\centering
+\input{cell120-figure}
+\caption{Orthogonal projection of the 120-cell into three dimensions along the line from its centre through one vertex, which places that vertex in the middle of the picture. The six coloured pentagons and the four black rays in the middle are the projection of the closed Lynchpin at that vertex. The pentagons are regular in four dimensions, and the projection widens their corners in the middle to \( 109.47^\circ \), which is why they join along the rays in the picture. The grey lines are the 1200 edges of the 120-cell.}
+\label{fig:cell120}
+\end{figure}
+
+Three pentagons around a corner behave differently. Three vectors are allowed to be linearly independent in three dimensions, so nothing forces their common angle to a single value, and three rays of which every two enclose \( 108^\circ \) exist in three dimensions. Three pentagons close around a corner in three dimensions, where they form a corner of the regular dodecahedron, and six pentagons close around a corner in four dimensions, where they form a vertex of the 120-cell.
+
+\subsection{The Same Discrepancy in Chemistry and Physics}
+The angles \( 108^\circ \) and \( 109.47^\circ \) also meet in chemistry. A carbon atom with four single bonds directs them at the tetrahedral angle to each other, and chemistry counts the bending of a bond angle away from \( 109.47^\circ \) as angle strain. A flat ring of five carbon atoms has the bond angle \( 108^\circ \) inside the ring, only \( 1.47^\circ \) from the tetrahedral angle. Flat rings of three and four carbon atoms have the angles \( 60^\circ \) and \( 90^\circ \), which lie \( 49.47^\circ \) and \( 19.47^\circ \) from it, so the ring of five has far less angle strain than these two. In dodecahedrane, \( \mathrm{C_{20}H_{20}} \), twenty carbon atoms sit at the corners of a dodecahedron. Each carbon atom directs three of its bonds along the three edges at its corner, at \( 108^\circ \) to each other, and the fourth bond to a hydrogen atom outside. This molecule realises the case of three pentagons at a corner, which closes in three dimensions.
+
+Regular dodecahedra cannot fill ordinary space. Two neighbouring faces of a regular dodecahedron enclose \( 116.57^\circ \). Three dodecahedra around a common edge cover \( 349.7^\circ \) of the full turn and leave \( 10.3^\circ \) open, and a fourth one does not fit, since four would need \( 466.3^\circ \). The Lynchpin shows the same failure at a corner. In the 120-cell four dodecahedra surround every vertex. Each of the four edges at the vertex belongs to three of the dodecahedra, and each of the six pentagons at the vertex belongs to two of them. Four regular dodecahedra cannot surround a point in this way in three dimensions, because their four edges at that point would be four rays of which every two enclose \( 108^\circ \). The opening of \( 10.3^\circ \) at an edge and the discrepancy of \( 1.47^\circ \) at a corner are two measures of this one fact.
+
+Physics calls an arrangement that atoms prefer locally and that cannot be continued through all of space geometrically frustrated \cite{sadoc-mosseri}. The theory of geometric frustration removes the frustration in the way Section \ref{sec:4d} closed the Lynchpin, by adding a dimension. Regular pentagons give an example one dimension lower. They cannot cover a flat plane, and twelve of them cover the surface of a ball as the faces of a dodecahedron. In the same way an arrangement that cannot fill ordinary space may fill the three-dimensional surface of a sphere in four-dimensional space, where its atoms sit at the vertices of a regular polytope. The theory then describes the real material as this polytope mapped back to ordinary space, with regions called defects where the arrangement is broken. The 120 dodecahedra of the 120-cell are an arrangement of this kind. The theory of glasses uses the 600-cell, a regular polytope with 600 tetrahedral cells, for atoms that pack in tetrahedra \cite{sadoc-mosseri, tarjus}, and related polytopes describe amorphous semiconductors, whose atoms have four bonds each \cite{mosseri1985}.
+
+
+\section{The Pythagorean Comma}
+\label{sec:comma}
+Howard and Weinstein compare the discrepancy of the Lynchpin with the Pythagorean comma, and this section examines the comparison. Musical intervals are ratios of frequencies. Two tones are an octave apart when their frequencies have the ratio 2, and a perfect fifth apart when they have the ratio \( \frac{3}{2} \). Twelve fifths stacked on each other give almost the same tone as seven octaves, and the Pythagorean comma is the ratio by which the twelve fifths exceed the seven octaves,
 \[
-\frac{531430}{524288} \approx 1.013615
+\frac{(3/2)^{12}}{2^7} = \frac{3^{12}}{2^{19}} = \frac{531441}{524288} \approx 1.0136433 .
 \]
+The Lynchpin has no frequencies, and its discrepancy of \( 1.47^\circ \) is a difference with a unit, which cannot be compared with a ratio. The quantity of the Lynchpin that can be compared with the comma is the ratio of the tetrahedral angle to the pentagon angle,
+\[
+\frac{\arccos(-\frac{1}{3})}{108^\circ} = \frac{109.4712206\ldots}{108} \approx 1.0136224 .
+\]
+The two numbers agree to four decimals and differ by about two parts in \( 10^5 \).
+
+\subsection{The Comma Is Rational and the Angle Ratio Is Irrational}
+The decimals above show that the two numbers differ. The proof of this subsection shows more, namely that the angle ratio is not a ratio of integers at all, while the Pythagorean comma is one.
+
+Write \( \theta = \arccos(-\frac{1}{3}) \). In radians \( 108^\circ = \frac{3\pi}{5} \), so the angle ratio is \( \frac{5\theta}{3\pi} \), and it is a ratio of integers exactly when \( \theta/\pi \) is one. Suppose that \( \theta = \frac{p}{q}\pi \) with integers \( p \) and \( q \geq 1 \). Then \( q\theta = p\pi \) and \( \cos(q\theta) = \pm 1 \).
+
+Define the numbers \( a_n = 3^n \cos(n\theta) \), so that \( a_0 = 1 \) and \( a_1 = 3\cos\theta = -1 \). The identity \( \cos((n+1)\theta) + \cos((n-1)\theta) = 2\cos\theta\cos(n\theta) \), multiplied by \( 3^{n+1} \) and used with \( \cos\theta = -\frac{1}{3} \), gives
+\[
+a_{n+1} = -2a_n - 9a_{n-1} .
+\]
+Every \( a_n \) is therefore an integer. The term \( 9a_{n-1} \) is divisible by 3, and \( -2a_n \) differs from \( a_n \) by \( 3a_n \), so \( a_{n+1} \) leaves the same remainder as \( a_n \) in the division by 3. The remainder of \( a_1 = -1 \) is 2, so every \( a_n \) with \( n \geq 1 \) leaves the remainder 2 and is not divisible by 3.
+
+The assumption \( \cos(q\theta) = \pm 1 \) says that \( a_q = \pm 3^q \), which is divisible by 3. The contradiction shows that \( \theta/\pi \) is not a ratio of integers, and neither is the angle ratio. The general fact behind this proof is Niven's theorem, by which the cosine of a rational multiple of \( \pi \) can be rational only if it is one of the values \( 0 \), \( \pm\frac{1}{2} \) and \( \pm 1 \) \cite{niven}.
+
+The angle ratio thus differs from the Pythagorean comma and from every interval that is a ratio of whole-number frequencies. The comma arises from stacking fifths against octaves and the angle ratio from the angle between two rays of a tetrahedron, and we know of no derivation that connects the two. Their agreement to four decimals is in this sense a coincidence.
 
 \subsection{Conversion to Cents}
-
-In musical terms, a cent is a logarithmic unit of measure used for musical intervals. One cent is \( \frac{1}{100} \) of a semitone in the equal-tempered scale, where an octave is divided into 1200 equal parts. The formula to convert a ratio \( r \) to cents is:
+Music measures the size of an interval in cents, which divide the octave into 1200 steps of equal ratio. The formula that converts a ratio \( r \) to cents is
 \[
-\text{Cents} = 1200 \times \log_2(r)
+\text{Cents} = 1200 \times \log_2(r) .
 \]
+The formula accepts any positive ratio, so it also gives the interval that two tones would form if their frequencies had the ratio of the two angles,
+\[
+\text{Cents} = 1200 \times \log_2(1.0136224) \approx 23.42 \, \text{cents} .
+\]
+For the Pythagorean comma the formula gives
+\[
+\text{Cents} = 1200 \times \log_2(1.0136433) \approx 23.46 \, \text{cents} .
+\]
+The smallest difference in pitch that a listener notices, the just noticeable difference, is commonly given as about 5 cents. Both intervals are more than four times as large, so two tones in the ratio of the two angles would be heard as different in pitch, in the same way as two tones a Pythagorean comma apart. The Lynchpin itself produces no tones, and the value in cents only expresses the size of its angle ratio in the unit of the comma.
+
+
+\section{The Size of the Gaps in Millimetres}
+\label{sec:size}
+The discrepancy \( \delta \) is an angle. This section turns it into distances, called gaps, for a Lynchpin built from pentagons the size of a hand. Let the side of the pentagon and the ray of the tetrahedron both be \( a = 5 \) cm, and recall the discrepancy \( \delta \approx 1.4712^\circ \approx 0.025678 \) rad. The far end of a ray is the vertex of the tetrahedron, and the far end of a pentagon side that starts at \( G \) is the next corner of the pentagon. Two segments of length \( a \) that leave the same point at the angle \( \beta \) have their far ends \( 2a\sin(\beta/2) \) apart. The first and third rows of the table follow from this rule.
+
+\begin{center}
+\begin{tabular}{p{8.6cm}ll}
+Distance & Formula & For \( a = 5 \) cm \\
+\hline
+Centred pentagon, from the far end of a side to the far end of the ray next to it & \( 2a\sin(\delta/4) \) & 0.64 mm \\
+Centred pentagons, between the far ends of two sides next to the same ray & \( \sqrt{3}\,a\sin(\delta/2) \) & 1.11 mm \\
+A single pentagon turned in its wedge until one side lies on its ray, from the far end of the other side to the far end of its ray & \( 2a\sin(\delta/2) \) & 1.28 mm \\
+\end{tabular}
+\end{center}
 
 \noindent
-Applying this to the Lynchpin geometric discrepancy ratio:
-\[
-\text{Cents} = 1200 \times \log_2(1.01362) \approx 23.41 \, \text{cents}
-\]
+In the first row the side and the ray enclose \( \delta/2 \), and the rule gives the distance. The third row leaves the rule of centring. It turns one pentagon in its wedge until one side lies on a ray, so the other side and its ray enclose the whole discrepancy \( \delta \).
 
-\noindent
-Applying this to the Pythagorean comma ratio:
-\[
-\text{Cents} = 1200 \times \log_2(1.01364) \approx 23.45 \, \text{cents}
-\]
+The second row is the gap between pentagons that should be joined, and Figure \ref{fig:endon} shows how it arises. Three pentagon sides lie next to each ray, and each of them is inclined to the ray by \( \delta/2 \) in the plane of its own wedge, so its far end lies at the distance \( a\sin(\delta/2) \) from the line of the ray. The three wedges at a ray stand at \( 120^\circ \) to each other around the ray, because the tetrahedron looks the same after a third of a turn about a ray. The three far ends therefore form an equilateral triangle around the ray, and the side of an equilateral triangle is \( \sqrt{3} \) times the distance from its centre to a corner.
 
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+    \coordinate (O) at (0,0);
+    \coordinate (P) at (90:2);
+    \coordinate (Q) at (210:2);
+    \coordinate (R) at (330:2);
+    \draw[dashed] (P) -- (Q) -- (R) -- cycle;
+    \draw[red, very thick] (O) -- (P);
+    \draw[green!60!black, very thick] (O) -- (Q);
+    \draw[blue, very thick] (O) -- (R);
+    \fill (O) circle (2pt);
+    \fill[red] (P) circle (2pt);
+    \fill[green!60!black] (Q) circle (2pt);
+    \fill[blue] (R) circle (2pt);
+    \node[left] at (-0.15,0.3) {ray};
+    \node[right] (lab) at (2.3,1.3) {\( a\sin(\delta/2) \)};
+    \draw[->, thin] (lab.west) -- (0.08,1.0);
+    \node[below] at (0,-1.1) {\( \sqrt{3}\,a\sin(\delta/2) \)};
+\end{tikzpicture}
+\caption{The three pentagon sides next to one ray, seen along the ray from its far end towards \( G \). The ray appears as the black point. The coloured lines are the three sides, which start at \( G \) behind the black point and end at the coloured points, and the dashed triangle joins their far ends. For \( a = 5 \) cm the triangle has sides of 1.11 mm.}
+\label{fig:endon}
+\end{figure}
 
-\subsection{Real-life Comparison of the Discrepancy}
-
-The smallest hearable difference in pitch, or a just noticeable difference (JND), is typically around 5 cents. The geometric angle discrepancy of approximately 1.47 degrees, corresponding to about 23.41 cents, is more than four times the JND. This means that the difference, though small, is perceptible to the human ear.
-
-Also, when creating the Lynchpin with pentagons the size of a hand, the discrepancy becomes visible but not totally unmanageable. When the discrepancy angle between two sides of a 5 cm isosceles triangle (one of the side being pentagon's, other being tetrahedron radius) is 1.147122 degrees, the base length is approximately 1 mm (calculated using the simplified Law of Cosines: \( c^2 = 2a^2 (1 - \cos(\theta)) \), where \( a = 5 \) cm and \( \theta = 0.020019 \) degrees in radians).
-
-It was demonstrated in Howard's competition, that three prize-awarded participants successfully created drone devices based on the Lynchpin geometry despite of this 1 mm scale discrepancy. (\href{https://www.terryslynchpins.com/welcome-to-now}{Website})
+All three distances are proportional to the size \( a \) of the pentagons.
 
 
 \section{Conclusion}
-The Pythagorean comma and the geometric ratio demonstrate different principles: cyclic, multiplicative processes rooted in harmonic relationships and logarithmic scaling versus direct trigonometric measurements and spatial projections. Despite their similar numerical values for the first four decimals, the methods of achieving these ratios are distinct in their unique contexts. This is further examplified with the prime factorization discrepancy. Thus, we can only speak of analogous discrepancies between Pythagorean comma and the Lynchpin angles.
+The six pentagons of the Lynchpin do not close in three dimensions, and the reason is the dimension of space. Four rays in three dimensions can enclose six equal angles only at \( 109.47^\circ \), and six angles of \( 108^\circ \), the corner of the regular pentagon, require four dimensions. With each ray tilted by \( 7.76^\circ \) towards a fourth axis the six pentagons close exactly, and the closed figure is the set of four edges and six pentagons at one vertex of the 120-cell. The Lynchpin of three dimensions is this set flattened, with the pentagons kept regular and a discrepancy of \( 1.47^\circ \) opened in every wedge. Chemistry meets the same pair of angles in rings of five carbon atoms, and physics treats the corresponding failure of dodecahedra to fill space with regular polytopes of four-dimensional space.
 
-The Pythagorean comma necessitates temperaments in musical tuning to balance the discrepancies. Similarly, the geometric ratio discrepancy demands precise adjustments in engineering and design to maintain structural integrity. It might result challenges in mass-producing Lynchpin-inspired gadgets on ensuring functionality and reliability at scale.
+The Pythagorean comma and the ratio of the two angles agree to four decimals. The comma is a ratio of integers, and the angle ratio is irrational, so the two numbers differ. The comparison of Howard and Weinstein is an analogy between two numbers that both exceed 1 by about 1.36 percent.
+
+In a physical Lynchpin built from regular pentagons with sides of 5 cm, the three pentagon sides next to each ray end 1.11 millimetres from each other. A builder has to bridge this distance at each of the four vertices of the tetrahedron, and the distance grows in proportion to the size of the pentagons.
 
 
-\section{References}
+\section{Verification}
+\label{sec:verification}
+Two sets of test scripts check the identities and numerical values of this paper. They are in the folder \texttt{tests} of the public repository of this project at \url{https://github.com/markomanninen/lynchpin} \cite{3d-model}.
+
+The first set is written for the computer algebra system Maxima. It checks the two determinants of Section \ref{sec:4d}, the tilt angle and its two exact forms, the value of \( \frac{\ell}{2r} \) for the 120-cell, the recurrence for \( a_n \) and the remainders of \( a_n \) up to \( n = 40 \), the opening of \( 10.3^\circ \) that three dodecahedra leave around an edge, and the numerical values of the angles, cents and gaps.
+
+The second set is written in JavaScript. It builds the 600 vertices of the 120-cell from its standard coordinates and confirms that the 120-cell has 1200 edges and 720 pentagons, that four edges and six pentagons meet at every vertex, and that every two edges at a vertex enclose \( 108^\circ \). The second set also tests the file \texttt{lynchpin4d.js} of the repository, which computes every point that the interactive model at \url{https://markomanninen.github.io/lynchpin} draws.
+
+A reader who has downloaded the repository and installed Maxima and Node.js runs both sets with the command \texttt{./scripts/run\_tests.sh} in the folder of the repository.
+
 
 \begin{thebibliography}{9}
 
@@ -336,13 +419,28 @@ The Pythagorean comma necessitates temperaments in musical tuning to balance the
 Joe Rogan Experience \#2171 - Eric Weinstein \& Terrence Howard. July 1, 2024. Available at \url{https://www.youtube.com/watch?v=nrOaFxNex7U}.
 
 \bibitem{lynchpin-competition}
-Howard, Terrence. (2021). \emph{Terrence Howards Lynchpin drone competition}. Available at \url{https://www.terryslynchpins.com/welcome-to-now}.
+Howard, Terrence. (2021). \emph{Terrence Howard's Lynchpin drone competition}. Available at \url{https://www.terryslynchpins.com/welcome-to-now}.
 
 \bibitem{ebook}
 Howard, Terrence. (2020). \emph{One Times One Equals Two eBook, section about Lynchpin, pages 124, 145}. Available at \url{https://tcotlc.com/wp-content/uploads/2020/09/OTOET_PREVIEW_055_SEPTEMBER_29_2020.pdf}.
 
 \bibitem{3d-model}
-Manninen, Marko. (2024). \emph{Interactive 3-D model of the Lynchpin geometry at GitHub-project}. Available at \url{https://github.com/markomanninen/lynchpin}.
+Manninen, Marko. (2024). \emph{Interactive model of the Lynchpin geometry, GitHub project}. Available at \url{https://github.com/markomanninen/lynchpin}.
+
+\bibitem{coxeter}
+Coxeter, H. S. M. (1973). \emph{Regular Polytopes}, 3rd edition. Dover Publications.
+
+\bibitem{sadoc-mosseri}
+Sadoc, Jean-Fran\c{c}ois and Mosseri, R\'emy. (1999). \emph{Geometrical Frustration}. Cambridge University Press.
+
+\bibitem{tarjus}
+Tarjus, G., Kivelson, S. A., Nussinov, Z. and Viot, P. (2005). The frustration-based approach of supercooled liquids and the glass transition, a review and critical assessment. \emph{Journal of Physics: Condensed Matter} 17, R1143--R1182. Available at \url{https://arxiv.org/abs/cond-mat/0509127}.
+
+\bibitem{mosseri1985}
+Mosseri, R., DiVincenzo, D. P., Sadoc, J.-F. and Brodsky, M. H. (1985). Polytope model and the electronic and structural properties of amorphous semiconductors. \emph{Physical Review B} 32, 3974.
+
+\bibitem{niven}
+Niven, Ivan. (1956). \emph{Irrational Numbers}, Corollary 3.12. Carus Mathematical Monographs 11, Mathematical Association of America.
 
 \end{thebibliography}
 

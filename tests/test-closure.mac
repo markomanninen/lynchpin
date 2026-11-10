@@ -1,0 +1,57 @@
+section("closure (the Lynchpin closes in four dimensions)")$
+/* With the pentagon cosine the Gram determinant is positive, so the four rays
+   are linearly independent and span four dimensions. */
+check("4D: 1 + 3 c5 = (7 - 3 sqrt 5)/4", zero_p(1 + 3*c5 - (7 - 3*sqrt(5))/4))$
+check("4D: 1 + 3 c5 > 0 because 49 > 45", is(7^2 > 3^2*5))$
+check("4D: the Gram determinant at c5 is positive",
+      is(float(determinant(G4(c5))) > 0))$
+check("3D: three pentagons fit, 1 + 2 c5 > 0 (the dodecahedron corner)",
+      zero_p(1 + 2*c5 - (3 - sqrt(5))/2) and is(3^2 > 5))$
+
+/* Tilt every tetrahedral direction by tau towards the fourth axis. */
+U : makelist(append(ct*T[i], [st]), i, 1, 4)$
+dotU : ratsimp(U[1] . U[2])$
+check("tilt: the mutual cosine is -cos^2/3 + sin^2",
+      zero_p(dotU - (-ct^2/3 + st^2)))$
+s2 : (1 + 3*c5)/4$
+check("tilt: sin^2 tau = (1 + 3 c5)/4 gives the pentagon cosine",
+      zero_p(subst([ct^2 = 1 - s2, st^2 = s2], expand(dotU)) - c5))$
+check("tilt: sin^2 tau = (7 - 3 sqrt 5)/16 = 1/(8 phi^4)",
+      zero_p(s2 - (7 - 3*sqrt(5))/16) and zero_p(s2 - 1/(8*phi^4)))$
+check("tilt: tau = 7.7612 degrees",
+      near_p(asin(sqrt(s2))*180/%pi, 7.761243907035, 1e-10))$
+check("shadow: dropping the fourth coordinate restores the cosine -1/3",
+      zero_p((ct*T[1]) . (ct*T[2])/ct^2 + 1/3))$
+check("shadow: the rays shorten by cos tau = 0.99084",
+      near_p(sqrt(1 - s2), 0.990839, 1e-6))$
+
+/* The pentagon on two unit rays a, b with a.b = c5 has the further corners
+   phi a + b and a + phi b.  Squared lengths, using only a.a = b.b = 1. */
+sq(x, y) := x^2 + y^2 + 2*x*y*c5$
+check("pentagon: the side from a to phi a + b has length 1",
+      zero_p(sq(phi - 1, 1) - 1))$
+check("pentagon: the side between the two far corners has length 1",
+      zero_p(sq(phi - 1, 1 - phi) - 1))$
+check("pentagon: the diagonal from the origin has length phi",
+      zero_p(sq(phi, 1) - phi^2))$
+
+/* The 120-cell in its standard coordinates has circumradius sqrt(8) and edge
+   3 - sqrt(5).  An edge of a figure inscribed in a sphere leans towards the
+   centre by the angle whose sine is edge/(2 radius). */
+check("120-cell: edge/(2 radius) equals sin tau",
+      zero_p(((3 - sqrt(5))/(2*sqrt(8)))^2 - s2))$
+check("120-cell: the centre is 1/(2 sin tau) = 3.7025 edges from the vertex",
+      near_p(1/(2*sqrt(s2)), 3.702459, 1e-6))$
+
+/* Dodecahedra around an edge.  Two neighbouring faces of a regular
+   dodecahedron enclose arccos(-1/sqrt(5)). */
+dih : acos(-1/sqrt(5))*180/%pi$
+check("dodecahedron: neighbouring faces enclose 116.57 degrees", near_p(dih, 116.565051, 1e-6))$
+check("dodecahedron: three around an edge cover 349.7 degrees", near_p(3*dih, 349.695, 1e-3))$
+check("dodecahedron: three around an edge leave 10.3 degrees open", near_p(360 - 3*dih, 10.305, 1e-3))$
+check("pentagon: cos 108 degrees is -0.3090 and 1 - c is 1.3090",
+      near_p(c5, -0.3090, 1e-4) and near_p(1 - c5, 1.3090, 1e-4))$
+check("dodecahedron: four around an edge would need 466.3 degrees", near_p(4*dih, 466.26, 1e-2))$
+check("rings: flat rings of three, four and five lie 49.47, 19.47 and 1.47 degrees from the tetrahedral angle",
+      near_p(acos(-1/3)*180/%pi - 60, 49.47, 1e-2) and near_p(acos(-1/3)*180/%pi - 90, 19.47, 1e-2)
+      and near_p(acos(-1/3)*180/%pi - 108, 1.47, 1e-2))$

@@ -1,0 +1,17 @@
+/* Minimal test harness. check(name, expr) where expr evaluates to true/false. */
+lp_npass : 0$
+lp_nfail : 0$
+lp_failed : []$
+check(name, val) := (
+  if is(val) = true then (lp_npass : lp_npass + 1, print("  PASS ", name))
+  else (lp_nfail : lp_nfail + 1, lp_failed : endcons(name, lp_failed),
+        print("  FAIL ", name)),
+  is(val))$
+/* Exact zero test for expressions with square roots. */
+zero_p(e) := block([algebraic : true], is(ratsimp(radcan(e)) = 0))$
+/* Numeric agreement to a given absolute tolerance. */
+near_p(a, b, tol) := is(abs(float(a) - float(b)) < tol)$
+section(s) := print(sconcat("--- ", s, " ---"))$
+test_summary() := (
+  print(sconcat("LYNCHPIN_TESTS passed=", lp_npass, " failed=", lp_nfail)),
+  if lp_nfail > 0 then print("Failed:", lp_failed))$

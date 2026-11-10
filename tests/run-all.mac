@@ -1,0 +1,8 @@
+/* Run the proof chain.  The easiest way is   ./scripts/run_tests.sh maxima
+   Directly (from the repository root):
+     maxima --very-quiet --batch=tests/run-all.mac  */
+if not stringp(lp_root) then lp_root : "."$
+load(sconcat(lp_root, "/tests/testlib.mac"))$
+for f in ["test-angles", "test-closure", "test-comma", "test-gaps"] do
+  batchload(sconcat(lp_root, "/tests/", f, ".mac"))$
+test_summary()$
